@@ -1,0 +1,12 @@
+"""
+Vercel Serverless Function Entrypoint for FastAPI.
+Exposes the ASGI app instance for Vercel Python runtime.
+"""
+
+import sys
+import os
+
+# Add parent directory to python path for module imports
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from backend.app import app
