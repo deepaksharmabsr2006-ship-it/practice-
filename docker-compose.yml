@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  driver-safety-monitor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: telematics_dms_gateway
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - DATABASE_URL=sqlite:///./telematics_fleet.db
+      - LOG_TELEMETRY=True
+    volumes:
+      - ./logs:/app/logs
+      - ./models:/app/models
+      - ./telematics_fleet.db:/app/telematics_fleet.db
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
