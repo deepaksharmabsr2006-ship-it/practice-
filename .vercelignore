@@ -1,0 +1,20 @@
+# Exclude Python backend and dependencies from Vercel static edge build
+# This prevents Vercel from attempting 'pip install -r requirements.txt' (which fails on pygame/opencv without Linux C-libraries)
+requirements.txt
+backend/
+core/
+ml/
+telematics/
+ui/
+Dockerfile
+docker-compose.yml
+render.yaml
+Procfile
+evaluate.py
+main.py
+web_app.py
+start_app.py
+start_camera_app.bat
+*.py
+*.pyc
+*.db

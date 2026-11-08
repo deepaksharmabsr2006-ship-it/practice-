@@ -1,4 +1,6 @@
 {
   "version": 2,
-  "cleanUrls": true
+  "cleanUrls": true,
+  "buildCommand": null,
+  "outputDirectory": "."
 }
