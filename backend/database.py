@@ -8,8 +8,11 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-# Database URL: Defaults to local SQLite file, can be overridden by CLOUD DATABASE_URL env var
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./telematics_fleet.db")
+# Database URL: Defaults to /tmp on Vercel serverless, or local file, or DATABASE_URL env var
+if os.getenv("VERCEL"):
+    DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:////tmp/telematics_fleet.db")
+else:
+    DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./telematics_fleet.db")
 
 # Fix for Heroku / Render postgres:// vs postgresql:// scheme
 if DATABASE_URL.startswith("postgres://"):
